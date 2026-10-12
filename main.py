@@ -1,11 +1,14 @@
 
+
 def exibir_menu():
     print("\n===== ORGANIZADOR DE DESPESAS PESSOAIS =====")
     print("1. Cadastrar despesa")
     print("2. Listar despesas")
     print("3. Ordenar despesas por valor (Bubble Sort)")
     print("4. Mostrar total gasto")
+    print("5. Ordenar despesas por valor (Merge Sort)")
     print("0. Sair")
+
 
 
 def cadastrar_despesa(despesas):
@@ -68,6 +71,36 @@ def bubble_sort(despesas):
 
     return lista_ordenada
 
+def merge_sort(despesas):
+    if len(despesas) <= 1:
+        return despesas.copy()
+
+    meio = len(despesas) // 2
+
+    esquerda = merge_sort(despesas[:meio])
+    direita = merge_sort(despesas[meio:])
+
+    return intercalar(esquerda, direita)
+
+
+def intercalar(esquerda, direita):
+    resultado = []
+    i = 0
+    j = 0
+
+    while i < len(esquerda) and j < len(direita):
+        if esquerda[i]["valor"] <= direita[j]["valor"]:
+            resultado.append(esquerda[i])
+            i += 1
+        else:
+            resultado.append(direita[j])
+            j += 1
+
+    resultado.extend(esquerda[i:])
+    resultado.extend(direita[j:])
+
+    return resultado
+
 
 def ordenar_despesas(despesas):
     if not despesas:
@@ -97,7 +130,7 @@ def main():
         exibir_menu()
         opcao = input("Escolha uma opção: ").strip()
 
-        print(f"\nOpção recebida pelo programa: [{opcao}]")
+        
 
         if opcao == "1":
             cadastrar_despesa(despesas)
@@ -115,6 +148,21 @@ def main():
 
         elif opcao == "4":
             mostrar_total(despesas)
+
+        elif opcao == "5":
+            if not despesas:
+                print("Nenhuma despesa cadastrada.")
+            else:
+                despesas_ordenadas = merge_sort(despesas)
+                print("\n===== DESPESAS ORDENADAS POR VALOR (MERGE SORT) =====")
+
+                for despesa in despesas_ordenadas:
+                    print(
+                        f'{despesa["descricao"]}: '
+                        f'R$ {despesa["valor"]:.2f}'
+                    )
+
+                input("\nPressione Enter para voltar ao menu...")
 
         elif opcao == "0":
             print("Encerrando o programa...")
