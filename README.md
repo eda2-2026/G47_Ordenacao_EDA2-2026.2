@@ -17,7 +17,7 @@ Projeto desenvolvido para a disciplina de **Estruturas de Dados 2 (ED2)**, com f
 - Desenvolver uma aplicação web simples para demonstrar o funcionamento dos algoritmos.
 - Apresentar os resultados de forma visual e acessível.
 - 
-Demonstração em vídeo
+## Demonstração em vídeo
 
 Vídeo de demonstração: [Inserir link do vídeo aqui]
 
