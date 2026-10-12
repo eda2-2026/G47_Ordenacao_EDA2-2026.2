@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Unifinanças | Despesas pessoais</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header class="topbar">
+        <a href="/" class="brand">
+            <span class="brand-icon">T</span>
+            <span>Uni <strong>gastos</strong></span>
+        </a>
+        <span class="topbar-label">Organizador de despesas</span>
+    </header>
+
+    <main class="container">
+        <section class="welcome">
+            <div>
+                <span class="eyebrow">CONTROLE FINANCEIRO PESSOAL</span>
+                <h1>Suas despesas,<br><span>em ordem.</span></h1>
+                <p>Organize seus gastos e compare algoritmos de ordenação.</p>
+            </div>
+            <div class="welcome-icon">R$</div>
+        </section>
+
+        <section class="summary">
+            <article class="summary-card total-card">
+                <span>Total de despesas</span>
+                <strong>R$ {{ "%.2f"|format(total) }}</strong>
+                <small>Soma de todos os registros</small>
+            </article>
+            <article class="summary-card">
+                <span>Registros cadastrados</span>
+                <strong>{{ despesas|length }}</strong>
+                <small>Despesas no organizador</small>
+            </article>
+            <article class="summary-card">
+                <span>Algoritmo selecionado</span>
+                <strong class="algorithm-name">{{ nome_algoritmo }}</strong>
+                <small>Ordenação crescente por valor</small>
+            </article>
+        </section>
+
+        <div class="content-grid">
+            <section class="panel">
+                <div class="panel-heading">
+                    <div>
+                        <span class="eyebrow">NOVO REGISTRO</span>
+                        <h2>Adicionar despesa</h2>
+                    </div>
+                    <span class="heading-icon">+</span>
+                </div>
+
+                <form method="POST" action="/">
+                    <label for="descricao">Descrição</label>
+                    <input
+                        type="text"
+                        id="descricao"
+                        name="descricao"
+                        placeholder="Ex.: Almoço, transporte..."
+                        required
+                    >
+
+                    <label for="valor">Valor (R$)</label>
+                    <input
+                        type="number"
+                        id="valor"
+                        name="valor"
+                        min="0.01"
+                        step="0.01"
+                        placeholder="0,00"
+                        required
+                    >
+
+                    <button type="submit" class="primary-button">
+                        + Cadastrar despesa
+                    </button>
+                </form>
+            </section>
+
+            <section class="panel">
+                <div class="panel-heading">
+                    <div>
+                        <span class="eyebrow">ORDENAÇÃO</span>
+                        <h2>Comparar algoritmos</h2>
+                    </div>
+                    <span class="heading-icon">↕</span>
+                </div>
+
+                <p class="panel-description">
+                    Escolha como deseja ordenar suas despesas pelo valor.
+                </p>
+
+                <div class="algorithm-options">
+                    <a href="/?algoritmo=bubble"
+                       class="algorithm-option {% if algoritmo == 'bubble' %}selected{% endif %}">
+                        <span class="option-number">01</span>
+                        <span>
+                            <strong>Bubble Sort</strong>
+                            <small>Ordenação por comparações sucessivas</small>
+                        </span>
+                        <span class="option-arrow">→</span>
+                    </a>
+
+                    <a href="/?algoritmo=merge"
+                       class="algorithm-option {% if algoritmo == 'merge' %}selected{% endif %}">
+                        <span class="option-number">02</span>
+                        <span>
+                            <strong>Merge Sort</strong>
+                            <small>Ordenação por divisão e conquista</small>
+                        </span>
+                        <span class="option-arrow">→</span>
+                    </a>
+                </div>
+
+                <div class="performance">
+                    <span>Tempo desta ordenação</span>
+                    <strong>{{ "%.6f"|format(tempo) }} s</strong>
+                    <small>O tempo varia conforme os dados e o computador.</small>
+                </div>
+            </section>
+        </div>
+
+        <section class="panel expenses-panel">
+            <div class="panel-heading">
+                <div>
+                    <span class="eyebrow">SEUS REGISTROS</span>
+                    <h2>Despesas cadastradas</h2>
+                </div>
+                <span class="count-badge">{{ despesas|length }} itens</span>
+            </div>
+
+            {% if despesas %}
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Descrição</th>
+                            <th>Valor</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for despesa in despesas %}
+                        <tr>
+                            <td class="row-number">{{ "%02d"|format(loop.index) }}</td>
+                            <td class="expense-description">{{ despesa.descricao }}</td>
+                            <td class="expense-value">R$ {{ "%.2f"|format(despesa.valor) }}</td>
+                            <td><span class="status">Registrada</span></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <p class="empty-state">Nenhuma despesa cadastrada ainda.</p>
+            {% endif %}
+        </section>
+
+        <footer>
+            <span>UniGastos</span>
+            <span>Projeto acadêmico · Estruturas de Dados e Algoritmos 2</span>
+        </footer>
+    </main>
+</body>
+</html>
