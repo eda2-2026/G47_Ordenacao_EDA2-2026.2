@@ -1,5 +1,6 @@
 
-
+import random
+from time import perf_counter
 def exibir_menu():
     print("\n===== ORGANIZADOR DE DESPESAS PESSOAIS =====")
     print("1. Cadastrar despesa")
@@ -7,8 +8,8 @@ def exibir_menu():
     print("3. Ordenar despesas por valor (Bubble Sort)")
     print("4. Mostrar total gasto")
     print("5. Ordenar despesas por valor (Merge Sort)")
+    print("6. Comparar desempenho dos algoritmos")
     print("0. Sair")
-
 
 
 def cadastrar_despesa(despesas):
@@ -101,6 +102,37 @@ def intercalar(esquerda, direita):
 
     return resultado
 
+def comparar_desempenho():
+    tamanhos = [100, 500, 1000, 2000]
+
+    print("\n===== COMPARAÇÃO DE DESEMPENHO =====")
+    print(f'{"Quantidade":<15} {"Bubble Sort (s)":<20} {"Merge Sort (s)":<20}')
+
+    for tamanho in tamanhos:
+        despesas_teste = [
+            {
+                "descricao": f"Despesa {i + 1}",
+                "valor": random.uniform(1, 1000)
+            }
+            for i in range(tamanho)
+        ]
+
+        inicio = perf_counter()
+        bubble_sort(despesas_teste)
+        tempo_bubble = perf_counter() - inicio
+
+        inicio = perf_counter()
+        merge_sort(despesas_teste)
+        tempo_merge = perf_counter() - inicio
+
+        print(
+            f"{tamanho:<15} "
+            f"{tempo_bubble:<20.6f} "
+            f"{tempo_merge:<20.6f}"
+        )
+
+    print("\nComparação concluída!")
+
 
 def ordenar_despesas(despesas):
     if not despesas:
@@ -163,6 +195,10 @@ def main():
                     )
 
                 input("\nPressione Enter para voltar ao menu...")
+
+        elif opcao == "6":
+            comparar_desempenho()
+            input("\nPressione Enter para voltar ao menu...")
 
         elif opcao == "0":
             print("Encerrando o programa...")
