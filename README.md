@@ -21,8 +21,11 @@ Projeto desenvolvido para a disciplina de **Estruturas de Dados 2 (ED2)**, com f
 
 Vídeo de demonstração: [Inserir link do vídeo aqui]
 
-## Demonstração programa 
-
+## Demonstração do sistema
+ Para bublle sort, merge sort e ordenação da lista de despesas
+![Tela principal do Organizaê](imagens/trabalho2.png)
+![Demonstração 2 do Organizaê](imagens/trabalho2.1.png)
+![Demonstração 3 do Organizaê](imagens/trabalho2.2.png)
 ## Funcionalidades
 
 - **Cadastro de despesas:** registro de uma descrição e de um valor.
