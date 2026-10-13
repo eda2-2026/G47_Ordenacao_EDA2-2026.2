@@ -16,16 +16,20 @@ Projeto desenvolvido para a disciplina de **Estruturas de Dados 2 (ED2)**, com f
 - Comparar o desempenho de diferentes algoritmos para conjuntos de dados de tamanhos variados.
 - Desenvolver uma aplicação web simples para demonstrar o funcionamento dos algoritmos.
 - Apresentar os resultados de forma visual e acessível.
-- 
+- Uso do sistema no dia a dia.
+
+
 ## Demonstração em vídeo
 
-Vídeo de demonstração: [Inserir link do vídeo aqui]
+ Vídeo de demonstração: https://youtu.be/3jvSRbTxctU
 
 ## Demonstração do sistema
  Para bublle sort, merge sort e ordenação da lista de despesas
+ 
 ![Tela principal do Organizaê](imagens/trabalho2.png)
 ![Demonstração 2 do Organizaê](imagens/trabalho2.1.png)
 ![Demonstração 3 do Organizaê](imagens/trabalho2.2.png)
+
 ## Funcionalidades
 
 - **Cadastro de despesas:** registro de uma descrição e de um valor.
